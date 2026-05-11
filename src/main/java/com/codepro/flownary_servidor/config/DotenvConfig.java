@@ -16,6 +16,7 @@ import java.util.Map;
 
 /**
  * Configuración para cargar variables de entorno desde archivo .env
+ * Solo se activa en perfiles que no son de test
  */
 @Configuration
 public class DotenvConfig {
@@ -25,6 +26,15 @@ public class DotenvConfig {
 
     @PostConstruct
     public void configure() {
+        // No cargar variables .env en perfil de test
+        String[] activeProfiles = environment.getActiveProfiles();
+        for (String profile : activeProfiles) {
+            if ("test".equals(profile)) {
+                System.out.println("Perfil 'test' detectado - omitiendo carga de variables .env");
+                return;
+            }
+        }
+        
         try {
             // Cargar variables desde el archivo .env manualmente
             Map<String, Object> dotenvProperties = loadEnvFile(".env");

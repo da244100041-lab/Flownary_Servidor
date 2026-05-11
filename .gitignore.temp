@@ -3,14 +3,11 @@
 # ==========================================
 
 target/
-build/
 out/
 *.class
-
+*.jar
 *.war
 *.ear
-
-build/libs/
 
 # Maven
 .mvn/wrapper/maven-wrapper.jar
@@ -49,7 +46,6 @@ bin/
 # NetBeans
 nbproject/private/
 dist/
-nbbuild/
 .nb-gradle/
 
 # ==========================================
