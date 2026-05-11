@@ -1,10 +1,255 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Flownary</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+  <!-- Toastr CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+  <!-- CSS propio -->
+  <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
-$END$
+
+<!-- HERO -->
+<section class="hero-section d-flex" style="padding-top: 60px !important;">
+
+  <div class="container text-center">
+
+    <h1 class="logo" style="font-size: 8rem !important;">
+      <i class="bi bi-kanban-fill"></i>
+      Flownary
+    </h1>
+
+    <p class="descripcion fs-3 mt-5 mx-auto">
+      Una plataforma dedicada a la gestión y colaboración entre miembros
+      para la realización de tareas, seguimiento de proyectos y organización
+      eficiente de equipos de trabajo.
+    </p>
+
+  </div>
+
+</section>
+
+<!-- REGISTRO -->
+<section class="py-5">
+
+  <div class="container">
+
+    <div class="text-center mb-5">
+
+      <h3 class="fw-bold">
+        Únete a Flownary
+      </h3>
+
+      <p class="text-muted">
+        Regístrate y comienza a colaborar con tu equipo.
+      </p>
+
+    </div>
+
+    <div class="row justify-content-center">
+
+      <div class="col-md-5 col-lg-4">
+
+        <div class="card shadow border-0 rounded-4">
+
+          <div class="card-body p-4">
+
+            
+            <form th:action="@{/index}" method="post" th:object="${user}">
+
+              <div class="mb-3">
+
+                <label class="form-label">
+                  Nombre
+                </label>
+
+                <input type="text"
+                       class="form-control"
+                       th:field="*{userName}"
+                       placeholder="Ingresa tu nombre"
+                       required>
+
+              </div>
+
+              <div class="mb-3">
+
+                <label class="form-label">
+                  Apellido
+                </label>
+
+                <input type="text"
+                       class="form-control"
+                       th:field="*{userLasname}"
+                       placeholder="Ingresa tu apellido"
+                       required>
+
+              </div>
+
+              <div class="mb-3">
+
+                <label class="form-label">
+                  Correo electrónico
+                </label>
+
+                <input type="email"
+                       class="form-control"
+                       th:field="*{email}"
+                       placeholder="ejemplo@correo.com"
+                       required>
+
+              </div>
+
+              <div class="mb-4">
+
+                <label class="form-label">
+                  Teléfono
+                </label>
+
+                <input type="tel"
+                       class="form-control"
+                       th:field="*{telefono}"
+                       placeholder="0000-0000"
+                       required>
+
+              </div>
+
+              <div class="mb-4">
+
+                <label class="form-label">
+                  Contraseña
+                </label>
+
+                <input type="password"
+                       class="form-control"
+                       th:field="*{password}"
+                       placeholder="Ingresa tu contraseña"
+                       required>
+
+              </div>
+
+              <div class="d-grid">
+
+                <button type="submit"
+                        class="btn btn-dark btn-lg rounded-3">
+
+                  Registrarse
+
+                </button>
+
+              </div>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- Elementos ocultos para mensajes de Thymeleaf -->
+<div th:if="${message}" th:text="${message}" id="successMessage" style="display: none;"></div>
+<div th:if="${error}" th:text="${error}" id="errorMessage" style="display: none;"></div>
+
+<!-- DESCARGA APP -->
+<section class="download-section py-5">
+
+  <div class="container text-center">
+
+    <h3 class="fw-bold mb-3">
+      Descarga nuestra App
+    </h3>
+
+    <p class="mb-4">
+      Lleva Flownary contigo y administra tus tareas desde cualquier lugar.
+    </p>
+
+    <a href="app/flownary.apk"
+       download
+       class="btn btn-success btn-lg rounded-pill px-4">
+
+      <i class="bi bi-download"></i>
+      Descargar App
+
+    </a>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="footer-section text-center py-3">
+
+  <p class="mb-0">
+    © 2026 Flownary - Gestión y colaboración de equipos
+  </p>
+
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- jQuery (necesario para Toastr) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- Toastr JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<!-- JavaScript para Notificaciones -->
+<script>
+// Configurar Toastr
+toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": true,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+};
+
+// Mostrar notificaciones usando elementos ocultos de Thymeleaf
+document.addEventListener('DOMContentLoaded', function() {
+    // Verificar elementos ocultos después de un pequeño delay
+    setTimeout(function() {
+        var successElement = document.getElementById('successMessage');
+        var errorElement = document.getElementById('errorMessage');
+        
+        if (successElement && successElement.textContent.trim()) {
+            toastr.success(successElement.textContent.trim(), "¡Éxito!");
+        }
+        
+        if (errorElement && errorElement.textContent.trim()) {
+            toastr.error(errorElement.textContent.trim(), "Error");
+        }
+    }, 100);
+});
+</script>
+
 </body>
 </html>

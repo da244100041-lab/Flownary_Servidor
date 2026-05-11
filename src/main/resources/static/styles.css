@@ -1,0 +1,166 @@
+body{
+    background-color: #f4f6f9;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+}
+
+/* HERO */
+.logoPersonalizado{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+}
+
+.hero-section{
+    min-height: 85vh;
+    background: linear-gradient(135deg, #1f3c88, #3a3f4e);
+    color: white;
+
+    padding-top: 180px;
+    padding-bottom: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.logo-container{
+    margin-bottom: 40px;
+}
+
+.logo{
+    font-size: 8rem !important;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.logo i{
+    font-size: 7.5rem !important;
+    margin-right: 10px;
+}
+
+.descripcion{
+    margin-top: 20px;
+    max-width: 750px;
+    font-size: 3rem;
+    line-height: 1.8;
+}
+
+/* CARD */
+
+.card{
+    background-color: #fd0000;
+}
+
+.form-control{
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.form-control:focus{
+    box-shadow: none;
+    border-color: #3b82f6;
+}
+
+/* BOTONES */
+
+.btn-primary{
+    background-color: #000000;
+    border: none;
+}
+
+.btn-primary:hover{
+    background-color: #2a2b30;
+}
+
+/* MENSAJE */
+
+.mensaje-section{
+    background-color: white;
+}
+
+.mensaje-texto{
+    max-width: 750px;
+    font-size: 1.1rem;
+}
+
+/* DESCARGA */
+
+.download-section{
+    background-color: #e9f1ff;
+}
+
+/* MODALES SIMPLES */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050;
+}
+
+.modal-dialog {
+    max-width: 500px;
+    width: 90%;
+    margin: 1.75rem auto;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    outline: 0;
+}
+
+.modal-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #212529;
+}
+
+.modal-body {
+    padding: 1rem 1.5rem;
+    color: #212529;
+}
+
+.modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #dee2e6;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #6c757d;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+}
+
+.btn-close:hover {
+    color: #495057;
+}
+
+/* FOOTER */
+
+.footer-section{
+    background-color: #111827;
+    color: white;
+}
