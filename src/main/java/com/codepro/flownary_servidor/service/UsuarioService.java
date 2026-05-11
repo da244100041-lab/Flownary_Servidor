@@ -1,8 +1,11 @@
 package com.codepro.flownary_servidor.service;
 
 import com.codepro.flownary_servidor.dto.LoginResponse;
+import com.codepro.flownary_servidor.dto.BienvenidaEmailDTO;
 import com.codepro.flownary_servidor.entity.Usuario;
 import com.codepro.flownary_servidor.repository.UsuarioRepository;
+import com.codepro.flownary_servidor.service.NotificacionService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +18,7 @@ import java.util.regex.Pattern;
  */
 @Service
 @Transactional
+@Slf4j
 public class UsuarioService {
 
     @Autowired
@@ -22,6 +26,9 @@ public class UsuarioService {
     
     @Autowired
     private SecurityService securityService;
+    
+    @Autowired
+    private NotificacionService notificacionService;
 
     // Patrón para validar que el teléfono comience con +503 y tenga 8 dígitos adicionales
     private static final Pattern TELEFONO_PATTERN = Pattern.compile("^\\+503\\d{8}$");
@@ -85,7 +92,12 @@ public class UsuarioService {
         usuario.setPassword(passwordHasheado);
         
         // Guardar el usuario
-        return usuarioRepository.save(usuario);
+        Usuario usuarioGuardado = usuarioRepository.save(usuario);
+        
+        // Usuario registrado exitosamente (notificaciones por WebSocket se manejarán en la app móvil)
+        log.info("Usuario registrado exitosamente: {}", usuarioGuardado.getEmail());
+        
+        return usuarioGuardado;
     }
 
     /**

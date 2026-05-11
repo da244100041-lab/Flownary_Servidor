@@ -8,6 +8,7 @@ import com.codepro.flownary_servidor.dto.EliminarEquipoResponse;
 import com.codepro.flownary_servidor.dto.EquipoUsuarioDTO;
 import com.codepro.flownary_servidor.dto.AgregarMiembroRequest;
 import com.codepro.flownary_servidor.dto.AgregarMiembroResponse;
+import com.codepro.flownary_servidor.dto.EquipoAsignadoEmailDTO;
 import com.codepro.flownary_servidor.entity.Equipo;
 import com.codepro.flownary_servidor.entity.EquipoMiembro;
 import com.codepro.flownary_servidor.entity.Rol;
@@ -59,6 +60,9 @@ public class EquipoService {
     
     @Autowired
     private UsuarioService usuarioService;
+    
+    @Autowired
+    private NotificacionService notificacionService;
 
     /**
      * Obtiene todos los equipos de un usuario con estadísticas.
@@ -440,9 +444,45 @@ public class EquipoService {
             
             // Construir nombre completo del miembro
             String nombreCompletoMiembro = usuarioMiembro.getUserName() + " " + usuarioMiembro.getUserLasname();
+            String nombreCompletoSolicitante = usuarioSolicitante.getUserName() + " " + usuarioSolicitante.getUserLasname();
             
             log.info("Miembro {} agregado exitosamente al equipo {} con rol {}", 
                     request.getIdUsuario(), idEquipo, rolMiembro);
+            
+            // Enviar correo de notificación al miembro agregado (solo si no es el mismo usuario solicitante)
+            try {
+                // Validar que el usuario agregado no sea el mismo que el solicitante
+                boolean esMismoUsuario = usuarioMiembro.getIdUsuario().equals(usuarioSolicitante.getIdUsuario());
+                
+                if (!esMismoUsuario) {
+                    EquipoAsignadoEmailDTO emailDTO = new EquipoAsignadoEmailDTO(
+                        nombreCompletoMiembro.trim(),
+                        usuarioMiembro.getEmail(),
+                        equipo.getNombre(),
+                        nombreCompletoSolicitante.trim()
+                    );
+                    
+                    // Nota: La entidad Equipo no tiene campo descripción actualmente
+                    // Si en el futuro se agrega el campo descripción, se puede descomentar este código
+                    // if (equipo.getDescripcion() != null && !equipo.getDescripcion().trim().isEmpty()) {
+                    //     emailDTO.setDescripcionEquipo(equipo.getDescripcion());
+                    // }
+                    
+                    boolean emailEnviado = notificacionService.enviarNotificacionEquipoAsignado(emailDTO);
+                    if (emailEnviado) {
+                        log.info("Correo de asignación a equipo enviado exitosamente al usuario: {}", usuarioMiembro.getEmail());
+                    } else {
+                        log.warn("No se pudo enviar el correo de asignación a equipo al usuario: {}", usuarioMiembro.getEmail());
+                    }
+                } else {
+                    log.info("No se envía correo de notificación porque el usuario agregado ({}) es el mismo que el solicitante", 
+                        usuarioMiembro.getEmail());
+                }
+            } catch (Exception e) {
+                log.error("Error al enviar correo de asignación a equipo al usuario {}: {}", 
+                    usuarioMiembro.getEmail(), e.getMessage(), e);
+                // No lanzamos la excepción para no interrumpir la asignación
+            }
             
             // Retornar respuesta exitosa
             AgregarMiembroResponse response = new AgregarMiembroResponse(

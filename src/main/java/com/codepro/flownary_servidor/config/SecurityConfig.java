@@ -49,11 +49,12 @@ public class SecurityConfig {
                 .requestMatchers("/", "/index", "/index.html").permitAll()
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/static/**").permitAll()
                 
-                // Endpoints de API públicos
+                // Endpoints de API públicos (orden específico importa)
                 .requestMatchers("/api/usuarios/registrar").permitAll()
                 .requestMatchers("/api/usuarios/verificar-email").permitAll()
                 .requestMatchers("/api/usuarios/validar-telefono").permitAll()
                 .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/tareas/**").permitAll() // Endpoint de tareas público
                 
                 // Permitir el formulario de registro web
                 .requestMatchers("/index").permitAll()
@@ -63,7 +64,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/miembros/**").authenticated()
                 .requestMatchers("/api/contactos/**").authenticated()
                 
-                // Cualquier otra petición /api/** requiere autenticación
+                // Cualquier otra petición /api/** requiere autenticación (después de los públicos)
                 .requestMatchers("/api/**").authenticated()
                 
                 // Cualquier otra petición debe estar autenticada

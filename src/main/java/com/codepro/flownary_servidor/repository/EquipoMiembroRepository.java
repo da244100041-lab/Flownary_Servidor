@@ -1,4 +1,5 @@
 package com.codepro.flownary_servidor.repository;
+import java.util.List;
 
 import com.codepro.flownary_servidor.entity.Equipo;
 import com.codepro.flownary_servidor.entity.EquipoMiembro;

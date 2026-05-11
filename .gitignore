@@ -1,37 +1,107 @@
-HELP.md
-.gradle
+# ==========================================
+# JAVA / SPRING BOOT
+# ==========================================
+
+target/
 build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
+out/
+*.class
+*.jar
+*.war
+*.ear
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
+# Maven
+.mvn/wrapper/maven-wrapper.jar
 
-### IntelliJ IDEA ###
-.idea
-*.iws
+# Gradle
+.gradle/
+
+# Logs
+logs/
+*.log
+
+# Spring Boot
+*.pid
+*.seed
+*.pid.lock
+
+# ==========================================
+# IDEs
+# ==========================================
+
+# IntelliJ IDEA
+.idea/
 *.iml
 *.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+*.iws
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-
-### VS Code ###
+# VS Code
 .vscode/
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# NetBeans
+nbproject/private/
+dist/
+nbbuild/
+.nb-gradle/
+
+# ==========================================
+# OS FILES
+# ==========================================
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Mac
+.DS_Store
+
+# ==========================================
+# ENVIRONMENT VARIABLES / SECRETS
+# ==========================================
+
+.env
+.env.*
+*.env
+
+# Local properties
+application-local.properties
+application-dev.properties
+application-prod.properties
+
+# Secrets
+secrets.properties
+secret.properties
+
+# ==========================================
+# DATABASE FILES
+# ==========================================
+
+*.db
+*.sqlite
+*.sqlite3
+
+# ==========================================
+# TEMP FILES
+# ==========================================
+
+temp/
+tmp/
+uploads/
+
+# ==========================================
+# NODE (por si luego agregas frontend)
+# ==========================================
+
+node_modules/
+
+# ==========================================
+# TESTS / COVERAGE
+# ==========================================
+
+coverage/
